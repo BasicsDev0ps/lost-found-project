@@ -18,10 +18,23 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm install
+        run: cd backend && npm install
+        working-directory: ./
 
-      - name: Deploy to Render
+      - name: Check for syntax errors
+        run: cd backend && node -c serverPostgres.js
+        working-directory: ./
+        continue-on-error: true
+
+      - name: Trigger Render deployment
         env:
-          DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
         run: |
-          curl -X POST "$DEPLOY_HOOK"
+          if [ -n "$RENDER_DEPLOY_HOOK" ]; then
+            echo "Triggering Render deployment..."
+            curl -X POST "$RENDER_DEPLOY_HOOK"
+            echo "Deployment triggered successfully!"
+          else
+            echo "RENDER_DEPLOY_HOOK not set. Skipping manual trigger (Render will auto-deploy)."
+          fi
+
