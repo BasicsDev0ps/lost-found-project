@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 // Import routes
@@ -22,7 +23,7 @@ mongoose.connect(process.env.MONGODB_URI)
 .catch(err => console.log('❌ MongoDB connection error:', err));
 
 // Static files - serve frontend
-app.use(express.static('../frontend'));
+app.use(express.static(path.join(__dirname, '../frontend')));
 
 // API Routes
 app.use('/api/auth', authRoutes);
@@ -33,6 +34,11 @@ app.use('/api/seed', seedRoutes);
 // Home route
 app.get('/api', (req, res) => {
   res.json({ message: 'Campus Lost & Found API is running' });
+});
+
+// Fallback - serve index.html for non-API routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
 // Error handling middleware
