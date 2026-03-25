@@ -10,8 +10,25 @@ async function loadUserItems() {
   try {
     const response = await fetch(`${API_URL}/items`);
     const data = await response.json();
-    const myItems = data.filter(item => item.postedBy === user.id);
-    const claimedItems = data.filter(item => item.claimedBy && item.claimedBy === user.id);
+    
+    console.log('User ID:', user.id);
+    console.log('All items:', data);
+    
+    const myItems = data.filter(item => {
+      // Support both camelCase and snake_case field names
+      const itemPostedBy = item.postedBy || item.posted_by;
+      const itemClaimedBy = item.claimedBy || item.claimed_by;
+      console.log(`Checking item ${item.id}: postedBy=${itemPostedBy}, user.id=${user.id}`);
+      return itemPostedBy === user.id;
+    });
+    
+    const claimedItems = data.filter(item => {
+      const itemClaimedBy = item.claimedBy || item.claimed_by;
+      return itemClaimedBy && itemClaimedBy === user.id;
+    });
+
+    console.log('My items:', myItems);
+    console.log('Claimed items:', claimedItems);
 
     const myItemsContainer = document.getElementById('myItemsContainer');
     const claimedItemsContainer = document.getElementById('claimedItemsContainer');
