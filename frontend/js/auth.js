@@ -59,16 +59,34 @@ if (registerForm) {
     try {
       errorDiv.style.display = 'none';
 
+      console.log('API_URL:', API_URL);
+      console.log('Register payload:', { name, email, phone, password });
+
       const response = await fetch(`${API_URL}/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, phone, password }),
       });
 
-      const data = await response.json();
+      console.log('Response status:', response.status);
+      console.log('Response headers:', response.headers);
+
+      let data;
+      try {
+        data = await response.json();
+        console.log('Response data:', data);
+      } catch (jsonError) {
+        console.error('Failed to parse JSON:', jsonError);
+        console.log('Response text:', await response.text());
+        throw new Error('Server returned invalid response');
+      }
 
       if (!response.ok) {
-        throw new Error(data.error || 'Registration failed');
+        throw new Error(data.error || `Registration failed (${response.status})`);
+      }
+
+      if (!data.token || !data.user) {
+        throw new Error('Invalid response: missing token or user');
       }
 
       setToken(data.token);
@@ -77,6 +95,7 @@ if (registerForm) {
       alert('Registration successful!');
       window.location.href = 'index.html';
     } catch (error) {
+      console.error('Registration error:', error);
       errorDiv.textContent = error.message;
       errorDiv.style.display = 'block';
     }
