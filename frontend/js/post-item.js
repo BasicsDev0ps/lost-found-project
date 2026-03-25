@@ -56,7 +56,7 @@ function handlePostForm(form, itemType) {
         type: itemType,
         location,
         foundDate,
-        image: image,
+        image_url: image,
       };
 
       console.log('Posting item with token:', token.substring(0, 20) + '...');

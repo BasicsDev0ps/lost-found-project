@@ -24,9 +24,10 @@ async function loadItemDetails() {
 function displayItemDetails(item) {
   document.getElementById('itemTitle').textContent = item.title;
   
-  // Fix image display - support both 'image' and 'image_url' fields
-  let imageUrl = item.image || item.image_url || 'https://via.placeholder.com/400x300?text=Item';
+  // Fix image display - API returns snake_case 'image_url' from Sequelize
+  let imageUrl = item.image_url || 'https://via.placeholder.com/400x300?text=Item';
   document.getElementById('itemImage').src = imageUrl;
+  console.log('Setting image to:', imageUrl);
   
   document.getElementById('itemType').textContent = item.type.toUpperCase();
   document.getElementById('itemType').className = `badge ${item.type}`;
@@ -37,7 +38,7 @@ function displayItemDetails(item) {
   document.getElementById('itemLocation').textContent = item.location;
   document.getElementById('itemDate').textContent = formatDate(item.createdAt);
 
-  // Posted by info - fix for JSON structure
+  // Posted by info - API returns association as 'postedByUser'
   const posterUser = item.postedByUser || {};
   if (posterUser && posterUser.name) {
     document.getElementById('posterName').textContent = posterUser.name;
@@ -45,7 +46,7 @@ function displayItemDetails(item) {
     document.getElementById('posterPhone').textContent = posterUser.phone || 'N/A';
   }
 
-  // Claimed by info - fix for JSON structure
+  // Claimed by info - API returns association as 'claimedByUser'
   const claimerUser = item.claimedByUser;
   if (claimerUser && claimerUser.name) {
     document.getElementById('claimedBySection').style.display = 'block';
@@ -54,7 +55,7 @@ function displayItemDetails(item) {
     document.getElementById('claimerPhone').textContent = claimerUser.phone || 'N/A';
   }
 
-  // Action buttons - fix for JSON structure (postedBy is string ID, not object)
+  // Action buttons - fix for JSON structure (posted_by is the snake_case field name from Sequelize)
   const user = getUser();
   const claimBtn = document.getElementById('claimBtn');
   const resolveBtn = document.getElementById('resolveBtn');
@@ -62,10 +63,11 @@ function displayItemDetails(item) {
   const deleteBtn = document.getElementById('deleteBtn');
 
   if (user) {
-    // Convert IDs to numbers for proper comparison
-    const itemOwnerID = Number(item.postedBy);
+    // Convert IDs to numbers for proper comparison  
+    // Note: backend returns snake_case fields: posted_by, claimed_by
+    const itemOwnerID = Number(item.posted_by);
     const currentUserID = Number(user.id);
-    const isClaimed = !!item.claimedBy;
+    const isClaimed = !!item.claimed_by;
     
     // Show claim button if item is open (not claimed) and user is not the poster
     const isOpen = item.status === 'open' || item.status === 'available';

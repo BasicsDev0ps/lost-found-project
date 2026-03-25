@@ -15,16 +15,16 @@ async function loadUserItems() {
     console.log('All items:', data);
     
     const myItems = data.filter(item => {
-      // Support both camelCase and snake_case field names
-      const itemPostedBy = item.postedBy || item.posted_by;
-      const itemClaimedBy = item.claimedBy || item.claimed_by;
-      console.log(`Checking item ${item.id}: postedBy=${itemPostedBy}, user.id=${user.id}`);
-      return itemPostedBy === user.id;
+      // Support both camelCase and snake_case field names, convert IDs to numbers
+      const itemPostedBy = Number(item.postedBy || item.posted_by);
+      const userID = Number(user.id);
+      console.log(`Checking item ${item.id}: postedBy=${itemPostedBy}, user.id=${userID}`);
+      return itemPostedBy === userID;
     });
     
     const claimedItems = data.filter(item => {
       const itemClaimedBy = item.claimedBy || item.claimed_by;
-      return itemClaimedBy && itemClaimedBy === user.id;
+      return itemClaimedBy && Number(itemClaimedBy) === Number(user.id);
     });
 
     console.log('My items:', myItems);

@@ -101,9 +101,9 @@
         const user = getUser();
         
         console.log('Edit authorization check:');
-        console.log('  item.postedBy:', item.postedBy, typeof item.postedBy);
+        console.log('  item.posted_by:', item.posted_by, typeof item.posted_by);
         console.log('  user.id:', user?.id, typeof user?.id);
-        console.log('  Match:', item.postedBy == user?.id);
+        console.log('  Match:', item.posted_by == user?.id);
         
         if (!user) {
           alert('Please login first');
@@ -112,7 +112,7 @@
         }
         
         // Convert to numbers for proper comparison (handle both string and number IDs)
-        const itemOwnerID = Number(item.postedBy);
+        const itemOwnerID = Number(item.posted_by);
         const currentUserID = Number(user.id);
         
         if (itemOwnerID !== currentUserID) {
@@ -171,7 +171,7 @@
 
         // Only include image if a new one was selected
         if (imageFile) {
-          updateData.image = await fileToBase64(imageFile);
+          updateData.image_url = await fileToBase64(imageFile);
         }
 
         const response = await fetch(`${API_URL}/items/${itemId}`, {
