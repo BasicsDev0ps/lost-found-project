@@ -1,0 +1,62 @@
+[
+  {
+    "id": "1774430936196",
+    "name": "Madhuravani",
+    "email": "madhuravani@campus.edu",
+    "password": "$2a$10$bFGNG.PCx7wK/s4RgLW99e55rlKuieUCsuVckEcE9lMh25I3ant/u",
+    "phone": "+91-9876543210",
+    "role": "student",
+    "isVerified": true,
+    "createdAt": "2026-03-25T09:28:56.196Z"
+  },
+  {
+    "id": "1774430936304",
+    "name": "Admin User",
+    "email": "admin@campus.edu",
+    "password": "$2a$10$xFJphZIoSkUMHHSCV1o9Se0xCxZ1QonLqCJjqBOKtOFm5VtOrHR5O",
+    "phone": "+91-9876543211",
+    "role": "admin",
+    "isVerified": true,
+    "createdAt": "2026-03-25T09:28:56.304Z"
+  },
+  {
+    "id": "1774430936414",
+    "name": "Raj Kumar",
+    "email": "raj@campus.edu",
+    "password": "$2a$10$yGcezS0NpX.UQ8bXo6fB1ezY3cfE3cw53pHV8caDheUPvxzK0HWMa",
+    "phone": "+91-9876543212",
+    "role": "staff",
+    "isVerified": true,
+    "createdAt": "2026-03-25T09:28:56.414Z"
+  },
+  {
+    "id": "1774431444180",
+    "name": "user",
+    "email": "user@gmail.com",
+    "password": "$2a$10$eofBCvl6rMNuWMzOUj2oGueyKFrjJuAuMOmuo0P4R/Vxlqx85d/mq",
+    "phone": "7829995263",
+    "role": "student",
+    "isVerified": true,
+    "createdAt": "2026-03-25T09:37:24.180Z"
+  },
+  {
+    "id": "1774433991398",
+    "name": "bhavya",
+    "email": "bhavya@123",
+    "password": "$2a$10$JHhIp.clY7DTRUXPd4lfNeyFHPXHsAVop/sBJclbuT2nrTTpPViSO",
+    "phone": "9089780978",
+    "role": "student",
+    "isVerified": true,
+    "createdAt": "2026-03-25T10:19:51.398Z"
+  },
+  {
+    "id": "1774435269733",
+    "name": "bhavya",
+    "email": "Bhavya@gmail.com",
+    "password": "$2a$10$wqj4JqvXT.G9wxi67LuaN.WDuBgT5X450NkJCtqX4JKhyjQpGtLpe",
+    "phone": "8773999988",
+    "role": "student",
+    "isVerified": true,
+    "createdAt": "2026-03-25T10:41:09.733Z"
+  }
+]

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item Details - Campus Lost & Found</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="nav-brand">
+        <h1>🔍 Lost & Found</h1>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="search.html">Search Items</a></li>
+        <li id="userNav">
+          <a href="login.html">Login</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Item Details Section -->
+  <section class="item-details-section">
+    <div class="container">
+      <a href="javascript:history.back()" class="back-link">← Back to Search</a>
+
+      <div class="item-details-container">
+        <!-- Item Image -->
+        <div class="item-image">
+          <img id="itemImage" src="https://via.placeholder.com/400x300?text=Item+Image" alt="Item">
+        </div>
+
+        <!-- Item Info -->
+        <div class="item-info">
+          <h2 id="itemTitle">Item Title</h2>
+
+          <div class="item-meta">
+            <span class="badge" id="itemType">Lost</span>
+            <span class="badge" id="itemCategory">Category</span>
+            <span class="badge" id="itemStatus">Available</span>
+          </div>
+
+          <div class="item-details">
+            <div class="detail-row">
+              <label>Description:</label>
+              <p id="itemDescription">Item description goes here</p>
+            </div>
+
+            <div class="detail-row">
+              <label>Location:</label>
+              <p id="itemLocation">Location</p>
+            </div>
+
+            <div class="detail-row">
+              <label>Date:</label>
+              <p id="itemDate">Date</p>
+            </div>
+
+            <div class="detail-row">
+              <label>Posted By:</label>
+              <div id="postedByInfo" class="user-contact">
+                <p id="posterName">Name</p>
+                <p id="posterEmail">Email</p>
+                <p id="posterPhone">Phone</p>
+              </div>
+            </div>
+
+            <div id="claimedBySection" style="display: none;" class="detail-row">
+              <label>Claimed By:</label>
+              <div id="claimedByInfo" class="user-contact">
+                <p id="claimerName">Name</p>
+                <p id="claimerEmail">Email</p>
+                <p id="claimerPhone">Phone</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="action-buttons">
+            <button id="claimBtn" class="btn btn-primary" style="display: none;">Claim This Item</button>
+            <button id="resolveBtn" class="btn btn-secondary" style="display: none;">Mark as Resolved</button>
+            <button id="editBtn" class="btn btn-secondary" style="display: none;">Edit Item</button>
+            <button id="deleteBtn" class="btn btn-danger" style="display: none;">Delete Item</button>
+          </div>
+
+          <div id="successMessage" class="success-message" style="display: none;"></div>
+          <div id="errorMessage" class="error-message" style="display: none;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 Campus Lost & Found Portal. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/item-details.js"></script>
+</body>
+</html>
