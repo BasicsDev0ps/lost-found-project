@@ -1,5 +1,12 @@
-// API Configuration
-const API_URL = 'http://localhost:5000/api';
+// API Configuration - Auto-detect environment
+let API_URL;
+if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+  // Local development
+  API_URL = 'http://localhost:5000/api';
+} else {
+  // Production - Use your Render backend
+  API_URL = 'https://lost-found-project-1bqp.onrender.com/api';
+}
 
 // Get token from localStorage
 function getToken() {
